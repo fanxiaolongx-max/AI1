@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>训练完成</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header><h1>MNIST 神经网络 Web 演示</h1></header>
+    <nav>
+        <a href="/">数据概览</a>
+        <a href="/data_viewer">数据预览</a>
+        <a href="/train">模型训练</a>
+        <a href="/add_data">添加数据</a>
+        <a href="/handwriting_recognizer">手写识别器</a>
+    </nav>
+    <div class="container">
+        <h2>🎉 训练完成！</h2>
+        <div class="section-content">
+            <p>新的模型已经成功训练并保存。</p>
+            <h3>最终模型性能</h3>
+            <table>
+                <tr>
+                    <th>评估指标</th>
+                    <th>数值</th>
+                </tr>
+                <tr>
+                    <td><strong>测试集准确率</strong></td>
+                    <td><strong>{{ "%.4f"|format(accuracy|float) }}</strong></td>
+                </tr>
+                <tr>
+                    <td>测试集损失值</td>
+                    <td>{{ "%.4f"|format(loss|float) }}</td>
+                </tr>
+            </table>
+
+            <div class="button-group">
+                <a href="/train" class="button">返回重新训练</a>
+                <a href="/handwriting_recognizer" class="button button-primary">去手写识别器测试新模型</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>模型训练仪表盘</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header><h1>MNIST 神经网络 Web 演示</h1></header>
+    <nav>
+        <a href="/">数据概览</a>
+        <a href="/data_viewer">数据预览</a>
+        <a href="/train">模型训练</a>
+        <a href="/add_data">添加数据</a>
+        <a href="/handwriting_recognizer">手写识别器</a>
+    </nav>
+    <div class="container">
+        <h2>模型训练仪表盘</h2>
+        <div class="training-setup">
+            <form id="training-form">
+                <div class="form-group">
+                    <h3>1. 选择模型类型</h3>
+                    <label><input type="radio" name="model_type" value="simple"> 简单模型</label>
+                    <label><input type="radio" name="model_type" value="cnn" checked> <strong>强大模型 (CNN)</strong></label>
+                </div>
+                <div class="form-group">
+                    <h3>2. 设置训练轮次</h3>
+                    <label for="epochs">Epochs (1-20):</label>
+                    <input type="number" id="epochs" name="epochs" value="5" min="1" max="20">
+                </div>
+                <div class="form-group">
+                    <h3>3. 使用自定义数据</h3>
+                    <label>
+                        <input type="checkbox" id="use_custom_data" name="use_custom_data" value="true" {{ 'disabled' if custom_data_count == 0 }}>
+                        增强训练 (使用已添加的 {{ custom_data_count }} 条自定义数据)
+                    </label>
+                    {% if custom_data_count == 0 %}<small>(请先前往“添加数据”页面添加自己的样本)</small>{% endif %}
+                </div>
+                <div class="button-group">
+                    <button type="submit" id="start-training-btn">开始训练</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="dashboard" class="dashboard-hidden">
+            <h2>实时训练监控</h2>
+            <div class="progress-container">
+                <label>总进度 (Epoch <span id="current-epoch">0</span>/<span id="total-epochs">0</span>)</label>
+                <progress id="total-progress" value="0" max="100"></progress>
+            </div>
+            <div class="charts-container">
+                <div class="chart-box">
+                    <h3>准确率 (Accuracy)</h3>
+                    <canvas id="accuracyChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>损失值 (Loss)</h3>
+                    <canvas id="lossChart"></canvas>
+                </div>
+            </div>
+
+            <h2>模型实时预测效果 (Epoch: <span id="prediction-epoch-label">0</span>)</h2>
+            <div id="prediction-gallery" class="image-gallery"></div>
+
+            <h2>实时训练日志</h2>
+            <pre id="log-output"></pre>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

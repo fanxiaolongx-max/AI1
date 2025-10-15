@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST 数据预览</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MNIST 手写数字识别 Web 演示</h1>
+    </header>
+    <nav>
+        <a href="/">数据概览</a>
+        <a href="/data_viewer">数据预览</a>
+        <a href="/train">模型训练</a>
+        <a href="/add_data">添加数据</a>
+        <a href="/handwriting_recognizer">手写识别器</a>
+    </nav>
+    <div class="container">
+        <h2>训练数据预览</h2>
+        <div class="section-content">
+            <p>这里展示的是从 MNIST 训练集中随机抽取的部分图片样本及其对应的真实数字标签。</p>
+            <p>每次点击“加载更多图片”按钮，都会从服务器获取新的随机图片。</p>
+            <div id="data-gallery" class="image-gallery">
+                </div>
+            <div class="button-group">
+                <button id="load-more-images">加载更多图片</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

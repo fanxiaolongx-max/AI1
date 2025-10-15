@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加自定义数据</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header><h1>MNIST 神经网络 Web 演示</h1></header>
+    <nav>
+        <a href="/">数据概览</a>
+        <a href="/data_viewer">数据预览</a>
+        <a href="/train">模型训练</a>
+        <a href="/add_data">添加数据</a>
+        <a href="/handwriting_recognizer">手写识别器</a>
+    </nav>
+    <div class="container">
+        <h2>添加自定义训练数据</h2>
+        <p>在这里，你可以画下自己的数字并为它打上标签，用于增强模型训练。</p>
+
+        <div class="add-data-container">
+            <div class="canvas-section">
+                <h3>1. 在画布上写一个数字</h3>
+                <canvas id="add-data-canvas" width="280" height="280"></canvas>
+                <div class="canvas-controls">
+                    <button id="clearCanvasBtn" class="clear">清空画布</button>
+                </div>
+            </div>
+            <div class="label-section">
+                <h3>2. 点击对应的数字为它打标签</h3>
+                <div id="label-buttons" class="label-buttons">
+                    </div>
+                <div id="add-data-feedback"></div>
+            </div>
+        </div>
+
+        <div class="custom-data-summary">
+            <h3>当前已添加的自定义样本 (<span id="custom-data-count">0</span>)</h3>
+            <div id="custom-data-gallery" class="image-gallery">
+                {% for image_b64, label in custom_samples %}
+                <div class="image-item">
+                    <img src="{{ image_b64 }}" alt="Custom Digit">
+                    <p>标签: {{ label }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="button-group" id="clear-data-container" style="display: none;">
+                <button id="clear-custom-data-btn" class="clear">清空所有自定义数据</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

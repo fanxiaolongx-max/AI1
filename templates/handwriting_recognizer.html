@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写数字识别器</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MNIST 手写数字识别 Web 演示</h1>
+    </header>
+    <nav>
+        <a href="/">数据概览</a>
+        <a href="/data_viewer">数据预览</a>
+        <a href="/train">模型训练</a>
+        <a href="/add_data">添加数据</a>
+        <a href="/handwriting_recognizer">手写识别器</a>
+    </nav>
+    <div class="container">
+        <h2>手写数字识别</h2>
+        <div class="section-content">
+            <p>请在下面的黑色画布上用鼠标手写一个数字 (0-9)。</p>
+            <p>尽量将数字写得大而清晰，占据画布中央，以便模型更好地识别。</p>
+
+            <div id="canvas-container">
+                <canvas id="drawingCanvas" width="280" height="280"></canvas>
+                <div class="canvas-controls">
+                    <button id="clearCanvas" class="clear">清空画布</button>
+                    <button id="predictDigit">识别数字</button>
+                </div>
+            </div>
+
+            <div id="prediction-results">
+                <h3>识别结果:</h3>
+                <div id="loadingSpinner" class="loading-spinner"></div>
+                <p id="prediction-message"></p>
+                <div id="prediction-digit"></div>
+                <p>预测概率:</p>
+                <ul id="probabilities-list">
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
