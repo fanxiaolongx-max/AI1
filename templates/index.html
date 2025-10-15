@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST 神经网络 Web 演示</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MNIST 手写数字识别 Web 演示</h1>
+    </header>
+    <nav>
+        <a href="/">数据概览</a>
+        <a href="/data_viewer">数据预览</a>
+        <a href="/train">模型训练</a>
+        <a href="/add_data">添加数据</a>
+        <a href="/handwriting_recognizer">手写识别器</a>
+    </nav>
+    <div class="container">
+        <h2>数据概览</h2>
+        <div class="section-content">
+            <p>本应用使用经典的 MNIST 手写数字数据集进行训练和演示。</p>
+            <p>你可以在“模型训练”页面选择参数并训练新模型。训练好的模型会自动保存并用于“手写识别器”。</p>
+            <p>当前模型状态: <strong>{{ summary.model_status }}</strong></p>
+
+            <h3>数据集信息</h3>
+            <table>
+                <tr>
+                    <th>数据集</th>
+                    <th>样本数量</th>
+                    <th>图片维度</th>
+                    <th>数据形状 (图片)</th>
+                    <th>数据形状 (标签)</th>
+                </tr>
+                <tr>
+                    <td>训练集</td>
+                    <td>{{ summary.num_train_images }}</td>
+                    <td>{{ summary.image_dim }}</td>
+                    <td><code>{{ summary.x_train_shape }}</code></td>
+                    <td><code>{{ summary.y_train_shape }}</code></td>
+                </tr>
+                <tr>
+                    <td>测试集</td>
+                    <td>{{ summary.num_test_images }}</td>
+                    <td>{{ summary.image_dim }}</td>
+                    <td><code>{{ summary.x_test_shape }}</code></td>
+                    <td><code>{{ summary.y_test_shape }}</code></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
